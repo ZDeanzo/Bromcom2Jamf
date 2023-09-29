@@ -16,7 +16,8 @@ do
     IFS=','
     read CLASS ADMISSION FIRST LAST EMAIL HOUSE TEACHER <<<"${line}"
 
-   
+   USERNAME=$(cut -d@ -f1 <<< "$EMAIL")
+
 
     if [ "$EMAIL" = "$PRE_EMAIL" ]; then
         #If the student is the same, stack the classes togehter
@@ -35,7 +36,7 @@ do
     fi
 
     PRE_EMAIL="$EMAIL"
-    PRE_USERNAME="$EMAIL"
+    PRE_USERNAME="$USERNAME"
     PRE_FIRST="$FIRST"
     PRE_LAST="$LAST"
 
