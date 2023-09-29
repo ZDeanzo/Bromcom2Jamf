@@ -30,7 +30,7 @@ do
         #Export the prevous student to the csv file
         echo "Outputting $PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",, to CSV"
         echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> output.csv
-        COMBINED=""
+        COMBINED="$CLASS"
         
     fi
 
