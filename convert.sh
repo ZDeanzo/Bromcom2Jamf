@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo ""
 echo "=============  The input spreasheet should have the following format:  ============="
 echo "CLASS | ADMISSION NO. | FIRST NAME | LAST NAME | EMAIL | HOUSE | CLASS TEACHER EMAIL"
@@ -9,13 +8,11 @@ echo ""
 # Set the FILE equal to the next command argument, i.e., $./SCRIPT.sh FILE.csv
 FILE=${1}
 
-
 # Remove the header from the CSV file.
 tail -n +2 "$FILE" > /tmp/HEADLESS_FILE.csv
 
 # Sort the CSV file by email.
 sort -t, -k5 < /tmp/HEADLESS_FILE.csv > /tmp/SORTED_FILE.csv
-
 
 # Set the Field Separator to read line by line
 IFS=$'\n'
@@ -29,9 +26,7 @@ do
     # Set Field Separator to a comma and create variables for each column
     IFS=','
     read CLASS ADMISSION FIRST LAST EMAIL HOUSE TEACHER <<<"${line}"
-
    USERNAME=$(cut -d@ -f1 <<< "$EMAIL")
-
 
     if [ "$EMAIL" = "$PRE_EMAIL" ]; then
         #If the student is the same, stack the classes togehter
@@ -39,8 +34,7 @@ do
             COMBINED="$CLASS"
         else
             COMBINED="$CLASS,$COMBINED"
-        fi
-       
+        fi     
     else
         #Export the prevous student to the csv file
        if [ "$PRE_EMAIL" = "" ]; then
@@ -49,8 +43,7 @@ do
             echo "Outputting $PRE_USERNAME to CSV"
             echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> /tmp/output.csv
             COMBINED="$CLASS"
-        fi
-        
+        fi        
     fi
 
     PRE_EMAIL="$EMAIL"
