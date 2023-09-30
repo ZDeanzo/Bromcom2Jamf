@@ -43,9 +43,13 @@ do
        
     else
         #Export the prevous student to the csv file
-        echo "Outputting $PRE_USERNAME to CSV"
-        echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> output.csv
-        COMBINED="$CLASS"
+       if [ "$PRE_EMAIL" = "" ]; then
+            COMBINED="$CLASS"
+        else
+            echo "Outputting $PRE_USERNAME to CSV"
+            echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> /tmp/output.csv
+            COMBINED="$CLASS"
+        fi
         
     fi
 
@@ -58,10 +62,17 @@ done
 
 #Export the last student to the csv file as they are missed by the loop
 echo "Outputting $PRE_USERNAME to CSV"
-echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> output.csv
+echo "$PRE_USERNAME,$PRE_EMAIL,$PRE_FIRST,$PRE_LAST,\"$COMBINED\",," >> /tmp/output.csv
+
+#Put the headers in the output file then copy from the temp output to final file
+echo "Username,Email,FirstName,LastName,Groups,TeacherGroups,Password" > ./output.csv
+cat /tmp/output.csv >> ./output.csv
+
+#Cleaning up temp files
+rm /tmp/output.csv /tmp/SORTED_FILE.csv /tmp/HEADLESS_FILE.csv
 
 echo ""
 echo "===================================================================================="
-echo "================  Task completed. Jamf headers need to be inseted  ================="
+echo "================================  Task completed.  ================================="
 echo "===================================================================================="
 echo ""
