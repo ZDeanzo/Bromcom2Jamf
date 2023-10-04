@@ -6,4 +6,4 @@ To use the script call it in a MacOS/Linux terminal and enter the location of th
 The Bromcom exported spreasheet is expected to have the following format:
 | CLASS | ADMISSION NO. | STUDENT FIRST NAME | STUDENT LAST NAME | STUDENT EMAIL | HOUSE | TEACHER FIRST NAME | TEACHER LAST NAME | CLASS TEACHER EMAIL |
 
-ADMISSION NO. & HOUSE are not used in the script but their columns are anticipted by the code. The script will cycle first though the students, then staff and gather up all of thier classes before outputting a csv file with the correct formatting for JAMF school. The staff are added to the class groups as teachers and are also added to a "STAFF" user group.
+ADMISSION NO. & HOUSE are not used in the script but their columns are anticipted by the code. The script will cycle first though the students, then staff and gather up all of thier classes before outputting a csv file with the correct formatting for JAMF school. The staff are added to the class groups as teachers and are also added to a "STAFF" user group. Note: Explamation Marks (!) are used by the code to wrap the classes before being stripped in the final export.
